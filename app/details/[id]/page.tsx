@@ -1,5 +1,5 @@
 import React from "react";
-import QRScanner from "../app/components/QRScanner";
+import Card from "../../components/Card";
 
 const products = [
   {
@@ -14,11 +14,8 @@ const products = [
 
 const Page = () => {
   return (
-    <div className="flex flex-wrap h-screen ">
-    <div>
-      <h1>QR Code Scanner</h1>
-      <QRScanner />
-    </div>
+    <div className="flex flex-wrap h-screen">
+        <Card product={products[0]} />
     </div>
   );
 };
