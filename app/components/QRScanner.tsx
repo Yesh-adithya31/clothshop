@@ -1,57 +1,39 @@
-"use client"
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from "react";
+import { Html5QrcodeScanner } from "html5-qrcode";
 
-const QRScanner = () => {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
+function QRScanner() {
+  const [scanResult, setScanResult] = useState<string | null>(null);
 
   useEffect(() => {
-    const constraints = { video: true };
-
-    navigator.mediaDevices.getUserMedia(constraints)
-      .then((stream) => {
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-          videoRef.current.play();
-        }
-      })
-      .catch((error) => {
-        console.error('Error accessing webcam:', error);
-      });
+    const scanner = new Html5QrcodeScanner("reader", {
+      qrbox: {
+        width: 250,
+        height: 250,
+      },
+      fps: 5,
+    }, false);
+    scanner.render(success, error);
+    function success(result: string) {
+      scanner.clear();
+      setScanResult(result);
+    }
+    function error(err: any) {
+      console.warn(err);
+    }
   }, []);
 
-  const handleVideoStream = () => {
-    if (videoRef.current) {
-      const canvas = document.createElement('canvas');
-      canvas.width = videoRef.current.videoWidth;
-      canvas.height = videoRef.current.videoHeight;
-      const context = canvas.getContext('2d');
-      
-      if (context) {
-        context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-
-        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-        // Use a QR code library (like ZXing) to decode the imageData and extract QR code content
-        // Handle the decoded content as needed
-      }
-    }
-  };
-
   return (
-    <div>
-      <video ref={videoRef} />
-      <button onClick={handleVideoStream}>Scan QR Code</button>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <h1 className="text-2xl font-bold mb-4">Scan here</h1>
+      {scanResult ? (
+        <div className="text-green-600">
+          Success: <a href={"http://" + scanResult}>{scanResult}</a>
+        </div>
+      ) : (
+        <div id="reader" className="w-64 h-64"></div>
+      )}
     </div>
   );
-};
+}
 
 export default QRScanner;
-
-
-
-
-
-
-
-  
-
-

@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useState } from 'react';
 import QRScanner from "../app/components/QRScanner";
 
 const products = [
@@ -12,7 +13,8 @@ const products = [
   },
 ];
 
-const Page = () => {
+const Page: React.FC = () => {
+  const [scannedCode, setScannedCode] = useState<string>('');
   return (
     <div className="flex flex-wrap h-screen ">
     <div>
