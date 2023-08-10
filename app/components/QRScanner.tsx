@@ -23,14 +23,14 @@ function QRScanner() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="container mx-auto bg-white">
       <h1 className="text-2xl font-bold mb-4">Scan here</h1>
       {scanResult ? (
         <div className="text-green-600">
           Success: <a href={"http://" + scanResult}>{scanResult}</a>
         </div>
       ) : (
-        <div id="reader" className="w-64 h-64"></div>
+        <div id="reader" className="w-80 h-64"></div>
       )}
     </div>
   );
