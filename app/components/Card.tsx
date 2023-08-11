@@ -14,7 +14,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <div className="p-4 w-full bg-white md:hidden">
       <div className="h-full  overflow-hidden">
         <div className="p-4 md:p-6">
-          <h2 className="text-xl font-semibold title-font mb-6">
+          <h2 className="text-xl text-black font-semibold title-font mb-6">
             {product.title}
           </h2>
           <div className="flex items-center justify-center sm:h-64 md:h-80 mb-6">
@@ -46,7 +46,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <h3 className="text-gray-500 text-sm tracking-widest title-font mb-1">
               Details
             </h3>
-            <p className="text-sm md:text-base leading-relaxed  ">
+            <p className="text-black text-sm md:text-base leading-relaxed text-justify">
               {product.description}
             </p>
           </div>
