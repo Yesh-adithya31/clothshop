@@ -11,12 +11,6 @@ import {
   fetchProductFailure,
 } from "../../../redux/productSlice";
 
-export function getServerSideProps(context: { params: any }) {
-  return {
-    props: { params: context.params },
-  };
-}
-
 const Page: React.FC = () => {
   const [id, setID] = useState("");
   const dispatch = useDispatch();
