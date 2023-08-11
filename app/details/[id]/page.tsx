@@ -1,21 +1,88 @@
-import React from "react";
-import Card from "../../components/Card";
+"use client";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-const products = [
-  {
-    title: "V-NECK BUTTON DOWN TOP",
-    image: "/image.jpg",
-    price: 29.99,
-    sizes: ["S", "M", "L"],
-    details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-];
+import ProductCard from "../../components/Card";
 
-const Page = () => {
+import { RootState } from "../../../redux/store";
+import {
+  fetchProductStart,
+  fetchProductSuccess,
+  fetchProductFailure,
+} from "../../../redux/productSlice";
+
+export function getServerSideProps(context: { params: any }) {
+  return {
+    props: { params: context.params },
+  };
+}
+
+const Page: React.FC = () => {
+  const [id, setID] = useState("");
+  const dispatch = useDispatch();
+  const product = useSelector((state: RootState) => state.product.product);
+  const loading = useSelector((state: RootState) => state.product.loading);
+  const error = useSelector((state: RootState) => state.product.error);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const currentPath = window.location.pathname.split("/");
+      setID(currentPath[2]);
+    }
+    if (id) {
+      dispatch(fetchProductStart());
+
+      fetch(`https://dummyjson.com/products/${id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          dispatch(fetchProductSuccess(data));
+        })
+        .catch((error) => {
+          dispatch(fetchProductFailure(error));
+        });
+    }
+  }, [id, dispatch]);
+
   return (
-    <div className="flex flex-wrap h-screen">
-        <Card product={products[0]} />
+    <div className="flex flex-wrap h-screen md:hidden">
+      {loading ? (
+        <div className="p-4 md:w-1/2 lg:w-1/3 bg-white md:hidden">
+          <div className="h-full  overflow-hidden justify-center">
+            <div className="p-4 md:p-6">
+              <p className="text-white font-bold bg-gray-600 text-xl p-4 rounded-md">
+                Product is Loading......
+              </p>
+              <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-opacity-75"></div>
+            </div>
+          </div>
+        </div>
+      ) : error ? (
+        <div className="p-4 md:w-1/2 lg:w-1/3 bg-white md:hidden">
+          <div className="h-full  overflow-hidden justify-center">
+            <div className="p-4 md:p-6">
+              <p className="text-white bg-red-400 text-xl p-4 rounded-md">
+                Error: {error.message}
+              </p>
+            </div>
+          </div>
+        </div>
+      ) : product ? (
+        !product.title ? (
+          <>
+            <div className="p-4 md:w-1/2 lg:w-1/3 bg-white md:hidden">
+              <div className="h-full  overflow-hidden justify-center">
+                <div className="p-4 md:p-6">
+                  <p className="text-white bg-red-400 text-xl p-4 rounded-md">
+                    Error: {product.message}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <ProductCard product={product} />
+        )
+      ) : null}
     </div>
   );
 };
