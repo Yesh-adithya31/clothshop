@@ -52,7 +52,7 @@ const QRScanner: React.FC = () => {
   return (
     <>
     {/* MOBILE VIEW */}
-    <div className="flex items-center justify-center h-screen md:hidden">
+    <div className="flex items-center justify-center h-screen w-full md:hidden">
       <div className="mx-auto bg-white p-8 shadow-md h-screen w-full">
         <div className="pt-24">
           {scanResult ? (
