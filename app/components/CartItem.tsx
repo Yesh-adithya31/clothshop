@@ -36,7 +36,7 @@ const CartItem: React.FC<CartItemProps> = ({ cart }) => {
         <p className="text-gray-500">LKR. {cart.price.toFixed(2)}</p>
       </div>
       <div className="flex-grow">
-        <h3 className="text-md font-small">Qty</h3>
+        <h3 className="text-md font-small text-black">Qty</h3>
         <p className="text-gray-500">{cart.quantity}</p>
       </div>
       <button className="text-red-500 font-semibold" onClick={() => handleRemoveFromCart(cart.id)}>
