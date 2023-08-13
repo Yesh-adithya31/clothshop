@@ -21,8 +21,8 @@ const Page: React.FC = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const currentPath = window.location.pathname.split("/");
-      // setID(currentPath[2]);
-      setID('1');
+      setID(currentPath[2]);
+      // setID('1');
     }
     if (id) {
       dispatch(fetchProductStart());

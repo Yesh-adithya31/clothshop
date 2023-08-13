@@ -1,14 +1,29 @@
 "use client";
-import Image from "next/image";
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import Product from "../../model/Product";
+import { CartData } from "../../model/CartTypes";
+import { addToCart } from "../../redux/cartSlice";
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const dispatch = useDispatch();
   const router = useRouter();
+
+  const handleAddToCart = (item: Product) => {
+    const cartItemData: CartData = {
+      id: item.id, // Set an appropriate ID
+      name: item.title,
+      imgurl: item.thumbnail,
+      price: item.price,
+      quantity: 1, // Assuming you start with a quantity of 1
+    };
+    dispatch(addToCart(cartItemData));
+    router.push("/cart");
+  };
 
   return (
     <div className="p-4 w-full bg-white md:hidden">
@@ -50,19 +65,21 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               {product.description}
             </p>
           </div>
+        </div>
 
-          <div className="flex flex-col sm:flex-row mt-2 md:mt-0 justify-center">
+        <div className="bg-white p-4 fixed bottom-20 left-0 right-0 shadow-lg">
+          <div className="flex justify-center">
             <button
-              className="text-white bg-indigo-500 border-0 py-2 px-6 md:px-8 focus:outline-none hover:bg-indigo-600 rounded mb-2 sm:mb-0 sm:mr-2"
-              onClick={() => router.push("/cart")}
+              className="bg-indigo-700 text-white font-bold px-7 py-2 rounded-lg"
+              onClick={() => handleAddToCart(product)}
             >
               Add to Cart
             </button>
             <button
-              className="text-indigo-500 border-2 py-2 px-6 md:px-8 focus:outline-none hover:text-indigo-600 rounded"
+              className="text-indigo-500 font-bold border-2 py-2 px-6 focus:outline-none hover:text-indigo-600  rounded-lg ml-4"
               onClick={() => router.push("/")}
             >
-              Next Product
+              Add Another
             </button>
           </div>
         </div>
