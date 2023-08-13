@@ -8,7 +8,7 @@ const CartPage: React.FC<CartState> = ({ cartItems }) => {
 
   return (
     <div className="mx-auto w-full h-screen p-5 bg-white md:hidden ">
-      <h1 className="text-2xl font-bold mb-4">Shopping Cart</h1>
+      <h1 className="text-2xl font-bold mb-4 text-black">Shopping Cart</h1>
       <div className="space-y-4">
         {cartItems.length > 0 ? (
           cartItems.map((item) => <CartItem key={item.id} cart={item} />)
