@@ -67,7 +67,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </div>
         </div>
 
-        <div className="bg-white p-4 fixed bottom-20 left-0 right-0">
+        <div className="bg-white p-4 fixed bottom-0 left-0 right-0">
           <div className="flex justify-center">
             <button
               className="bg-indigo-700 text-white font-bold px-7 py-2 rounded-lg"
