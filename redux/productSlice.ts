@@ -1,10 +1,10 @@
 // productSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import Product from '../model/Product';
+import {ProductResult} from '../model/Product';
 import ProductError from '../model/ProductError';
 
 interface ProductState {
-  product: Product | null;
+  product: ProductResult | null;
   loading: boolean;
   error: ProductError | null;
 }
@@ -23,7 +23,7 @@ const productSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    fetchProductSuccess: (state, action: PayloadAction<Product>) => {
+    fetchProductSuccess: (state, action: PayloadAction<ProductResult>) => {
       state.loading = false;
       state.product = action.payload;
     },

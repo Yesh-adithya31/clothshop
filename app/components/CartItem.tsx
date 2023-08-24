@@ -3,7 +3,7 @@ import { CartData } from '../../model/CartTypes';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { removeItem } from "../../redux/cartSlice";
-import Product from "../../model/Product";
+import {Product} from "../../model/Product";
 import { setCartItemsToLocalStorage } from "../../utils/localStorage";
 
 interface CartItemProps {

@@ -4,6 +4,7 @@ export interface CartData {
     imgurl: string;
     price: number;
     quantity: number;
+    maxQty: number;
   }
   
   export interface CartState {

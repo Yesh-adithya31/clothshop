@@ -28,8 +28,8 @@ const QRScanner: React.FC = () => {
       };
     }
     function success(result: string) {
-      router.push(`/details/${result}`);
-      // console.log(router.pathname);
+      router.push(`/details/${result.split("/")[4]}`);
+      // console.log(result.split("/")[4]);
       // setScanResult(result);
       setScannerActive(false);
     }

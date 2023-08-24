@@ -27,10 +27,10 @@ const Page: React.FC = () => {
     if (id) {
       dispatch(fetchProductStart());
 
-      fetch(`https://dummyjson.com/products/${id}`)
+      fetch(`http://18.136.12.149:8080/codemap/${id}`)
         .then((response) => response.json())
         .then((data) => {
-          dispatch(fetchProductSuccess(data));
+          dispatch(fetchProductSuccess(data[0]));
         })
         .catch((error) => {
           dispatch(fetchProductFailure(error));
@@ -62,20 +62,20 @@ const Page: React.FC = () => {
           </div>
         </div>
       ) : product ? (
-        !product.title ? (
+        !product.product ? (
           <>
             <div className="p-4 md:w-1/2 lg:w-1/3 bg-white md:hidden">
               <div className="h-full  overflow-hidden justify-center">
                 <div className="p-4 md:p-6">
                   <p className="text-white bg-red-400 text-xl p-4 rounded-md">
-                    Error: {product.message}
+                    Error: "There is no any Item to Display."
                   </p>
                 </div>
               </div>
             </div>
           </>
         ) : (
-          <ProductCard product={product} />
+          <ProductCard product={product.product} />
         )
       ) : null}
     </div>

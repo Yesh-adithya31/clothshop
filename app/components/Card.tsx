@@ -1,7 +1,7 @@
 "use client";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-import Product from "../../model/Product";
+import {Product} from "../../model/Product";
 import { CartData } from "../../model/CartTypes";
 import { addToCart } from "../../redux/cartSlice";
 
@@ -16,10 +16,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const handleAddToCart = (item: Product) => {
     const cartItemData: CartData = {
       id: item.id, // Set an appropriate ID
-      name: item.title,
-      imgurl: item.thumbnail,
+      name: item.name,
+      imgurl: item.image_url,
       price: item.price,
       quantity: 1, // Assuming you start with a quantity of 1
+      maxQty: item.quantity
     };
     dispatch(addToCart(cartItemData));
     router.push("/cart");
@@ -30,13 +31,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <div className="h-full  overflow-hidden">
         <div className="p-4 md:p-6">
           <h2 className="text-xl text-black font-semibold title-font mb-6">
-            {product.title}
+            {product.name}
           </h2>
           <div className="flex items-center justify-center sm:h-64 md:h-80 mb-6">
             <img
               className=" object-center border-8 border-gray-500 border-opacity-60 rounded-lg"
-              src={product.thumbnail}
-              alt={product.title}
+              src={product.image_url}
+              alt={product.name}
             />
             <div className=""></div>
           </div>
@@ -46,14 +47,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </p>
           <div className="mb-2 md:mb-3 ">
             <h3 className="text-gray-500 text-sm md:text-xs tracking-widest title-font mb-1">
-              Sizes Available:
+              Category:
             </h3>
             {/* {product.sizes.map((size, index) => ( */}
             <span
-              key={product.rating}
+              key={product.category}
               className="inline-block border rounded-full py-1 px-2 text-xs font-semibold text-gray-700 mr-2"
             >
-              {product.rating}
+              {product.category}
             </span>
             {/* ))} */}
           </div>

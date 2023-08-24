@@ -18,3 +18,7 @@ export const getCartItemsFromLocalStorage = (): CartData[] => {
 export const setCartItemsToLocalStorage = (items: CartData[]): void => {
         nextLocalStorage()?.setItem('cartItems', JSON.stringify(items)); 
 };
+
+export const clearCart = () =>{
+  nextLocalStorage()?.setItem('cartItems', JSON.stringify([])); 
+}
