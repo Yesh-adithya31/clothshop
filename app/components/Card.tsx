@@ -1,7 +1,7 @@
 "use client";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-import {Product} from "../../model/Product";
+import { Product } from "../../model/Product";
 import { CartData } from "../../model/CartTypes";
 import { addToCart } from "../../redux/cartSlice";
 
@@ -20,7 +20,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       imgurl: item.image_url,
       price: item.price,
       quantity: 1, // Assuming you start with a quantity of 1
-      maxQty: item.quantity
+      maxQty: item.quantity,
     };
     dispatch(addToCart(cartItemData));
     router.push("/cart");

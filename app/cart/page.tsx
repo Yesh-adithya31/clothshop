@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import CartPage from "../components/CartPage";
 import { RootState } from "../../redux/store";
 

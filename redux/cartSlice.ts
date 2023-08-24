@@ -1,8 +1,6 @@
 import { setCartItemsToLocalStorage } from '../utils/localStorage';
 import { CartData, CartState } from '../model/CartTypes';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { useRouter } from "next/navigation";
-import axios from 'axios'
 
 const initialState: CartState = {
   cartItems: [],
@@ -26,21 +24,9 @@ const cartSlice = createSlice({
     },
     removeItem: (state, action: PayloadAction<number>) => {
       state.cartItems = state.cartItems.filter(cartItems => cartItems.id !== action.payload);
-    },
-    checkout: (state) => {
-      const router = useRouter();
-      const values = state.cartItems.map(item => item.id.toString());
-      axios.post('http://18.136.12.149:8080/product/getCheckoutURL', { values })
-        .then(response => {
-          console.log('Checkout response:', response.data);
-          router.push(response.data)
-        })
-        .catch(error => {
-          console.error('Checkout failed:', error);
-        });
-    },
+    }
   },
 });
 
-export const { addToCart, removeItem, checkout } = cartSlice.actions;
+export const { addToCart, removeItem } = cartSlice.actions;
 export default cartSlice.reducer;

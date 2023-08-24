@@ -1,13 +1,13 @@
 import React from "react";
-import { CartData } from '../../model/CartTypes';
+import { CartData } from "../../model/CartTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { removeItem } from "../../redux/cartSlice";
-import {Product} from "../../model/Product";
+import { Product } from "../../model/Product";
 import { setCartItemsToLocalStorage } from "../../utils/localStorage";
 
 interface CartItemProps {
-  cart: CartData
+  cart: CartData;
 }
 
 const CartItem: React.FC<CartItemProps> = ({ cart }) => {
@@ -32,14 +32,19 @@ const CartItem: React.FC<CartItemProps> = ({ cart }) => {
         />
       </div>
       <div className="flex-grow">
-        <h3 className="text-lg font-bold text-purple-800 whitespace-pre-line">{cart.name}</h3>
+        <h3 className="text-lg font-bold text-purple-800 whitespace-pre-line">
+          {cart.name}
+        </h3>
         <p className="text-gray-500">LKR. {cart.price.toFixed(2)}</p>
       </div>
       <div className="flex-grow">
         <h3 className="text-md font-small text-black">Qty</h3>
         <p className="text-gray-500">{cart.quantity}</p>
       </div>
-      <button className="text-red-500 font-semibold" onClick={() => handleRemoveFromCart(cart.id)}>
+      <button
+        className="text-red-500 font-semibold"
+        onClick={() => handleRemoveFromCart(cart.id)}
+      >
         {" "}
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -1,7 +1,7 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import { Html5QrcodeScanner } from "html5-qrcode";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 const QRScanner: React.FC = () => {
   const router = useRouter();
@@ -35,7 +35,6 @@ const QRScanner: React.FC = () => {
     }
   }, [scannerActive]);
 
-
   function error(err: any) {
     console.warn(err);
   }
@@ -51,38 +50,41 @@ const QRScanner: React.FC = () => {
 
   return (
     <>
-    {/* MOBILE VIEW */}
-    <div className="flex items-center justify-center h-screen w-full md:hidden">
-      <div className="mx-auto bg-white p-8 shadow-md h-screen w-full">
-        <div className="pt-24">
-          {scanResult ? (
-            <div className="w-80 h-64 bg-gray-200 mb-4 mx-auto rounded-lg text-green-600">
-              Success: <a href={"https://" + scanResult}>{scanResult}</a>
-            </div>
-          ) : (
-            <div id="reader" className="w-80 h-64 bg-gray-200 mx-auto rounded-lg"></div>
-          )}
-        </div>
-          <div>
-          {!scanResult && (
-            <button
-              onClick={startScanning}
-              className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full block w-full mx-auto mt-4"
-              >
-              SCAN NOW
-            </button>
-          )}
-          {scanResult && (
-            <button
-              onClick={endScanning}
-              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded block mx-auto mt-4"
-            >
-              End Scan
-            </button>
-        )}
+      {/* MOBILE VIEW */}
+      <div className="flex items-center justify-center h-screen w-full md:hidden">
+        <div className="mx-auto bg-white p-8 shadow-md h-screen w-full">
+          <div className="pt-24">
+            {scanResult ? (
+              <div className="w-80 h-64 bg-gray-200 mb-4 mx-auto rounded-lg text-green-600">
+                Success: <a href={"https://" + scanResult}>{scanResult}</a>
+              </div>
+            ) : (
+              <div
+                id="reader"
+                className="w-80 h-64 bg-gray-200 mx-auto rounded-lg"
+              ></div>
+            )}
           </div>
+          <div>
+            {!scanResult && (
+              <button
+                onClick={startScanning}
+                className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full block w-full mx-auto mt-4"
+              >
+                SCAN NOW
+              </button>
+            )}
+            {scanResult && (
+              <button
+                onClick={endScanning}
+                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded block mx-auto mt-4"
+              >
+                End Scan
+              </button>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
     </>
   );
 };

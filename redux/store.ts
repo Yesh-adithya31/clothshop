@@ -3,7 +3,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import productReducer from './productSlice';
 import cartReducer from './cartSlice';
 import { getCartItemsFromLocalStorage } from '../utils/localStorage';
-import thunk from 'redux-thunk';
 
 const persistedCartItems = getCartItemsFromLocalStorage();
 

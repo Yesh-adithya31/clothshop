@@ -1,6 +1,6 @@
 // productSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {ProductResult} from '../model/Product';
+import { ProductResult } from '../model/Product';
 import ProductError from '../model/ProductError';
 
 interface ProductState {
