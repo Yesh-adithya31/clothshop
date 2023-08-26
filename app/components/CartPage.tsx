@@ -9,8 +9,20 @@ import { clearCart } from "../../utils/localStorage";
  
 const CartPage: React.FC<CartState> = ({ cartItems }) => {
   const router = useRouter();
-  const videoRef = useRef<HTMLVideoElement>(null);
-  
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleOpenCamera = () => {
+    if (inputRef.current) {
+      inputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
+    if (file) {
+      // You can process the selected image file here
+    }
+  };
   const handleCheckout = () => {
     const values = cartItems.map(item => item.id.toString());
     axios.post('/product/getCheckoutURL', { values })
@@ -24,17 +36,6 @@ const CartPage: React.FC<CartState> = ({ cartItems }) => {
     });
   };
 
-  
-  const handleOpenCamera = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-      }
-    } catch (error) {
-      console.error('Error accessing camera:', error);
-    }
-  };
 
   return (
     <div className="mx-auto w-full h-screen p-5 bg-white md:hidden ">
@@ -52,7 +53,14 @@ const CartPage: React.FC<CartState> = ({ cartItems }) => {
           </>
         )}
       </div>
-      <video ref={videoRef} autoPlay playsInline style={{ display: 'none' }} />
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/*"
+        // capture="camera"
+        style={{ display: 'none' }}
+        onChange={handleFileChange}
+      />
       <div className="bg-white p-4 fixed bottom-0 left-0 right-0">
         <div className="flex justify-center">
           <button
