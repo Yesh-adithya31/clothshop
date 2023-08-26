@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useRef} from "react";
 import CartItem from "./CartItem";
 import { CartState } from "../../model/CartTypes";
 import { useRouter } from "next/navigation";
@@ -9,7 +9,8 @@ import { clearCart } from "../../utils/localStorage";
  
 const CartPage: React.FC<CartState> = ({ cartItems }) => {
   const router = useRouter();
-
+  const videoRef = useRef<HTMLVideoElement>(null);
+  
   const handleCheckout = () => {
     const values = cartItems.map(item => item.id.toString());
     axios.post('http://18.136.12.149:8080/product/getCheckoutURL', { values })
@@ -21,6 +22,18 @@ const CartPage: React.FC<CartState> = ({ cartItems }) => {
     .catch(error => {
       console.error('Checkout failed:', error);
     });
+  };
+
+  
+  const handleOpenCamera = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+    } catch (error) {
+      console.error('Error accessing camera:', error);
+    }
   };
 
   return (
@@ -39,7 +52,7 @@ const CartPage: React.FC<CartState> = ({ cartItems }) => {
           </>
         )}
       </div>
-
+      <video ref={videoRef} autoPlay playsInline style={{ display: 'none' }} />
       <div className="bg-white p-4 fixed bottom-0 left-0 right-0">
         <div className="flex justify-center">
           <button
@@ -50,7 +63,7 @@ const CartPage: React.FC<CartState> = ({ cartItems }) => {
           </button>
           <button
             className="bg-indigo-700 text-white font-bold px-7 py-2 rounded-lg ml-4"
-            onClick={() => router.push("/")}
+            onClick={handleOpenCamera}
           >
             Add Another
           </button>
