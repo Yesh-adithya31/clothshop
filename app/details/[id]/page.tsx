@@ -27,7 +27,7 @@ const Page: React.FC = () => {
     if (id) {
       dispatch(fetchProductStart());
 
-      fetch(`http://18.136.12.149:8080/codemap/${id}`)
+      fetch(`/codemap/${id}`)
         .then((response) => response.json())
         .then((data) => {
           dispatch(fetchProductSuccess(data[0]));

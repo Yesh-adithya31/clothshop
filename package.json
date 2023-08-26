@@ -17,6 +17,7 @@
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "html5-qrcode": "^2.3.8",
+    "http-proxy-middleware": "^2.0.6",
     "next": "13.4.12",
     "postcss": "8.4.27",
     "react": "18.2.0",

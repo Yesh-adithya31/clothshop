@@ -13,7 +13,7 @@ const CartPage: React.FC<CartState> = ({ cartItems }) => {
   
   const handleCheckout = () => {
     const values = cartItems.map(item => item.id.toString());
-    axios.post('http://18.136.12.149:8080/product/getCheckoutURL', { values })
+    axios.post('/product/getCheckoutURL', { values })
     .then(response => {
       console.log('Checkout response:', response.data.url);
       router.push(response.data.url);
