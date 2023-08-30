@@ -1,6 +1,6 @@
 "use client";
-import React,{useRef} from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { Product } from "../../model/Product";
 import { CartData } from "../../model/CartTypes";
@@ -79,7 +79,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </button>
             <button
               className="text-indigo-500 font-bold border-2 py-2 px-6 focus:outline-none hover:text-indigo-600  rounded-lg ml-4"
-              ref="camera://"
+              onClick={() => router.push("/")}
             >
               Add Another
             </button>

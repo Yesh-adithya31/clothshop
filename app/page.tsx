@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import QRScanner from "../app/components/QRScanner";
+import QRScannerComponent from "../app/components/QRScannerComponent";
 
 const Page: React.FC = () => {
   return (
     <>
       <div className="flex flex-wrap h-screen md:hidden">
-        <QRScanner />
+        <QRScannerComponent />
       </div>
       {/* DESKTOP VIEW */}
       <div className="flex items-center justify-center h-screen bg-white">
