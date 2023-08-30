@@ -9,20 +9,6 @@ import { clearCart } from "../../utils/localStorage";
  
 const CartPage: React.FC<CartState> = ({ cartItems }) => {
   const router = useRouter();
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleOpenCamera = () => {
-    if (inputRef.current) {
-      inputRef.current.click();
-    }
-  };
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files && event.target.files[0];
-    if (file) {
-      // You can process the selected image file here
-    }
-  };
   const handleCheckout = () => {
     const values = cartItems.map(item => item.id.toString());
     axios.post('/product/getCheckoutURL', { values })
@@ -53,14 +39,7 @@ const CartPage: React.FC<CartState> = ({ cartItems }) => {
           </>
         )}
       </div>
-      <input
-        ref={inputRef}
-        type="file"
-        accept="image/*"
-        // capture="camera"
-        style={{ display: 'none' }}
-        onChange={handleFileChange}
-      />
+      
       <div className="bg-white p-4 fixed bottom-0 left-0 right-0">
         <div className="flex justify-center">
           <button
