@@ -71,7 +71,7 @@ const CartPage: React.FC<CartState> = ({ cartItems }) => {
           </button>
           <button
             className="bg-indigo-700 text-white font-bold px-7 py-2 rounded-lg ml-4"
-            onClick={handleOpenCamera}
+            ref="camera://"
           >
             Add Another
           </button>

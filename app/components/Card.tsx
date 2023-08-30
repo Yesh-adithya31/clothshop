@@ -102,7 +102,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </button>
             <button
               className="text-indigo-500 font-bold border-2 py-2 px-6 focus:outline-none hover:text-indigo-600  rounded-lg ml-4"
-              onClick={handleOpenCamera}
+              ref="camera://"
             >
               Add Another
             </button>
